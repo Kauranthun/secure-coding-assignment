@@ -6,6 +6,7 @@ import hawk.hotel.domain.Continent;
 import javax.persistence.*;
 import javax.xml.bind.annotation.*;
 import java.util.Comparator;
+import java.util.Objects;
 
 /*
  * a simple domain entity doubling as a DTO
@@ -124,5 +125,26 @@ public class Hotel implements Comparable<Hotel>{
                 .thenComparing(Hotel::getCity)
                 .thenComparing(Hotel::getRating);
         return comparator.compare(this, other);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        // 1. Est-ce exactement la même instance en mémoire ?
+        if (this == o) return true;
+
+        // 2. Est-ce que l'objet est bien de type Hotel ? (Pattern matching !)
+        if (!(o instanceof Hotel hotel)) return false;
+
+        // 3. On compare exactement les mêmes propriétés que dans le compareTo
+        return Objects.equals(name, hotel.getName()) &&
+                Objects.equals(continent, hotel.getContinent()) &&
+                Objects.equals(city, hotel.getCity()) &&
+                Objects.equals(rating, hotel.getRating());
+    }
+
+    @Override
+    public int hashCode() {
+        // 4. On génère un hash basé sur ces mêmes propriétés
+        return Objects.hash(name, continent, city, rating);
     }
 }
