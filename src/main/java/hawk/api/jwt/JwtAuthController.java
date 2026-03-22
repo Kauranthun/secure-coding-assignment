@@ -52,7 +52,7 @@ public class JwtAuthController {
 
             String tenantId = this.userRepo.findByName(username).getTenantId();
             String token = jwtTokenProvider.createToken(username,
-                    userDetails.getAuthorities().stream().map(auth -> ((GrantedAuthority) auth).toString()).collect(Collectors.toList()),
+                    userDetails.getAuthorities().stream().map(auth -> ((GrantedAuthority) auth).toString()).toList(),
                     tenantId);
             Map<Object, Object> model = new HashMap<>();
             model.put("username", username);
