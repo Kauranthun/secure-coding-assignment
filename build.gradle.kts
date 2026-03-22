@@ -5,8 +5,18 @@ plugins {
     idea
     distribution
     id("org.springframework.boot") version "2.7.18"
+    id("org.sonarqube") version "4.4.1.3373"
 }
 apply(plugin = "io.spring.dependency-management")
+
+sonar {
+    properties {
+        property("sonar.projectKey", "javaspringvulny")
+        property("sonar.projectName", "javaspringvulny")
+        property("sonar.host.url", "http://localhost:9000")
+        property("sonar.token", "sqp_24c2b41b7016fa9200f1ad7b5b884efdab4017fe")
+    }
+}
 
 repositories {
     mavenCentral()

@@ -14,6 +14,7 @@ import java.util.List;
 
 @Controller
 public class AdminController {
+
     @Autowired
     UserSearchService userSearchService;
 

@@ -1,5 +1,6 @@
 package hawk.hotel.rest;
 
+import java.util.logging.Logger;
 import hawk.hotel.domain.Continent;
 import hawk.hotel.domain.Hotel;
 import hawk.hotel.exception.DataFormatException;
@@ -24,6 +25,7 @@ import java.util.Map;
 @RequestMapping(value = "/example/v1/hotels")
 public class HotelController extends AbstractRestHandler {
 
+    Logger logger = Logger.getLogger(getClass().getName());
     @Autowired
     private HotelService hotelService;
 
@@ -99,7 +101,7 @@ public class HotelController extends AbstractRestHandler {
             @RequestParam(required = false, defaultValue = "null") Continent continent,
             HttpServletRequest request, HttpServletResponse response
     ) {
-        System.out.println("Received a continent to filter by... " + continent.name() + " ...ignoring...");
+        logger.info("Received a continent to filter by... " + continent.name() + " ...ignoring...");
         return ResponseEntity.ok(this.hotelService.randomHotel());
     }
 
