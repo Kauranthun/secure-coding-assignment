@@ -25,24 +25,24 @@ public class DBInterceptor {
 
             @Override
             public void onDelete(Object entity, Serializable id, Object[] state, String[] propertyNames, Type[] types) {
-                if (entity instanceof TenantSupport) {
-                    ((TenantSupport) entity).setTenantId(TenantContext.getCurrentTenant());
+                if (entity instanceof TenantSupport tenantSupport) {
+                    tenantSupport.setTenantId(TenantContext.getCurrentTenant());
                 }
             }
 
 
             @Override
             public boolean onFlushDirty(Object entity, Serializable id, Object[] currentState, Object[] previousState, String[] propertyNames, Type[] types) {
-                if (entity instanceof TenantSupport) {
-                    ((TenantSupport) entity).setTenantId(TenantContext.getCurrentTenant());
+                if (entity instanceof TenantSupport tenantSupport) {
+                    tenantSupport.setTenantId(TenantContext.getCurrentTenant());
                 }
                 return false;
             }
 
             @Override
             public boolean onSave(Object entity, Serializable id, Object[] state, String[] propertyNames, Type[] types) {
-                if (entity instanceof TenantSupport) {
-                    ((TenantSupport) entity).setTenantId(TenantContext.getCurrentTenant());
+                if (entity instanceof TenantSupport tenantSupport) {
+                    tenantSupport.setTenantId(TenantContext.getCurrentTenant());
                 }
                 return false;
             }

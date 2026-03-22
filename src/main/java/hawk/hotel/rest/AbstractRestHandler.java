@@ -26,8 +26,7 @@ public abstract class AbstractRestHandler implements ApplicationEventPublisherAw
     protected static final String DEFAULT_PAGE_NUM = "0";
     protected final Logger log = LoggerFactory.getLogger(this.getClass());
     protected ApplicationEventPublisher eventPublisher;
-
-    //todo: replace with exception mapping
+    
     public static <T> T checkResourceFound(final T resource) {
         if (resource == null) {
             throw new ResourceNotFoundException("resource not found");

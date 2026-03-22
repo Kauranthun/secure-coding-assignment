@@ -159,8 +159,6 @@ public class HotelController extends AbstractRestHandler {
         if (id != hotel.getId()) throw new DataFormatException("ID doesn't match!");
         this.hotelService.updateHotel(hotel);
     }
-
-    //todo: @ApiImplicitParams, @ApiResponses
     @RequestMapping(value = "/{id}",
             method = RequestMethod.DELETE,
             produces = {"application/json", "application/xml"})
