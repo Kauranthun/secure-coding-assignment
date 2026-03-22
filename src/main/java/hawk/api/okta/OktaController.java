@@ -21,7 +21,7 @@ public class OktaController {
         while (headerNames.hasMoreElements()) {
             String name = headerNames.nextElement();
             String value = request.getHeader(name);
-            logger.info(name + ": " + value);
+            logger.info("{}: {}", name, value);
         }
         String authToken = request.getHeader("Authorization");
         if (authToken == null || !authToken.startsWith("Bearer ")) {
