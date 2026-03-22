@@ -3,7 +3,6 @@ package hawk.interceptor;
 import hawk.context.TenantContext;
 import hawk.entity.TenantSupport;
 import org.hibernate.EmptyInterceptor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.orm.jpa.JpaProperties;
 import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
 import org.springframework.context.annotation.Bean;

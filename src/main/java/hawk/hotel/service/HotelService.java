@@ -3,8 +3,6 @@ package hawk.hotel.service;
 import hawk.hotel.dao.HotelRepository;
 import hawk.hotel.domain.Continent;
 import hawk.hotel.domain.Hotel;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

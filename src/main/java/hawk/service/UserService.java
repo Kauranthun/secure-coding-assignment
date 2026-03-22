@@ -1,18 +1,11 @@
 package hawk.service;
 
 import hawk.entity.User;
-import hawk.form.Search;
 import hawk.repos.UserRepo;
-import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
-import java.sql.ResultSet;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class UserService {
 
