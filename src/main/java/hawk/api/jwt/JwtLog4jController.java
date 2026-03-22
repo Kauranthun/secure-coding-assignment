@@ -17,7 +17,7 @@ public class JwtLog4jController {
     private static final Logger logger = LogManager.getLogger(JwtLog4jController.class);
 
     @GetMapping("/log4j")
-    public ResponseEntity logRequest(@RequestParam String text, HttpServletRequest request) {
+    public ResponseEntity<Void> logRequest(@RequestParam String text, HttpServletRequest request) {
         Enumeration<String> headers = request.getHeaderNames();
         while (headers.hasMoreElements()) {
             String it = headers.nextElement();

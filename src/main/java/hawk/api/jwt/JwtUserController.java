@@ -34,13 +34,13 @@ public class JwtUserController {
     }
 
     @GetMapping("/search/{text}")
-    public ResponseEntity search(@PathVariable("text") String text) {
+    public ResponseEntity<List<User>> search(@PathVariable("text") String text) {
         Search search = new Search(text);
         return ResponseEntity.ok(this.userService.findUsersByName(search.getSearchText()));
     }
 
     @GetMapping("/search/bad/{text}")
-    public ResponseEntity searchCrappy(@PathVariable("text") String text) {
+    public ResponseEntity<List<User>> searchCrappy(@PathVariable("text") String text) {
         Search search = new Search(text);
         return ResponseEntity.ok(this.userSearchService.search(search));
     }

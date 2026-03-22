@@ -20,7 +20,7 @@ import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBo
 public class PayloadController {
 
     private static final char[] chars = new char[]{'a','b','c',' ','\n'};
-    private static Map<Integer, byte[]> payloadCache = new ConcurrentHashMap();
+    private static Map<Integer, byte[]> payloadCache = new ConcurrentHashMap<>();
 
     @Value("${payload.start-size:2048}")
     private int startPayloadSize = 2048;

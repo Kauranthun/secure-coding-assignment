@@ -1,6 +1,7 @@
 package hawk.api.jwt;
 
 import hawk.api.SearchResult;
+import hawk.entity.Item;
 import hawk.form.Search;
 import hawk.repos.ItemsRepo;
 import hawk.service.SearchService;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/jwt/items")
@@ -32,26 +35,26 @@ public class JwtItemController {
     }
 
     @GetMapping("/search/")
-    public ResponseEntity searchAll() {
+    public ResponseEntity<List<Item>> searchAll() {
         Search search = new Search("");
         return ResponseEntity.ok(searchService.search(search));
     }
 
     @GetMapping("/search/{text}")
-    public ResponseEntity search(@PathVariable("text") String text) {
+    public ResponseEntity<List<Item>> search(@PathVariable("text") String text) {
         Search search = new Search(text);
         return ResponseEntity.ok(searchService.search(search));
     }
 
     @PostMapping("/search")
-    public ResponseEntity search(@RequestBody Search search) {
+    public ResponseEntity<SearchResult> search(@RequestBody Search search) {
         SearchResult result = new SearchResult(search.getSearchText(), searchService.search(search));
         return ResponseEntity.ok(result);
     }
 
     // @PathVariable("id") String id should be types correctly as a Long. eg: @PathVariable("id") Long id
     @GetMapping("/{id}")
-    public ResponseEntity getById(@PathVariable("id") String id) {
+    public ResponseEntity<Item> getById(@PathVariable("id") String id) {
         val item = repo.findById(Long.getLong(id));
         return ResponseEntity.ok(item);
     }
