@@ -25,7 +25,7 @@ public class HotelService {
     @Autowired
     private HotelRepository hotelRepository;
 
-    public HotelService() {
+    public HotelService() { // Default constructor required by Spring for bean instantiation
     }
 
     public Hotel createHotel(Hotel hotel) {
