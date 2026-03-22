@@ -58,7 +58,7 @@ public class HotelController extends AbstractRestHandler {
     @ResponseStatus(HttpStatus.OK)
     public
     @ResponseBody
-    Page<? extends Hotel> upperBoundedCollectionOfHotels(
+    Page<Hotel> upperBoundedCollectionOfHotels(
             @RequestParam(value = "page", required = true, defaultValue = DEFAULT_PAGE_NUM) Integer page,
             @RequestParam(value = "size", required = true, defaultValue = DEFAULT_PAGE_SIZE) Integer size,
             HttpServletRequest request, HttpServletResponse response) {
@@ -71,7 +71,7 @@ public class HotelController extends AbstractRestHandler {
     @ResponseStatus(HttpStatus.OK)
     public
     @ResponseBody
-    Page<? super Hotel> lowerBoundedCollectionOfHotels(
+    Page<Hotel> lowerBoundedCollectionOfHotels(
             @RequestParam(value = "page", required = true, defaultValue = DEFAULT_PAGE_NUM) Integer page,
 
             @RequestParam(value = "size", required = true, defaultValue = DEFAULT_PAGE_SIZE) Integer size,
@@ -85,7 +85,7 @@ public class HotelController extends AbstractRestHandler {
     @ResponseStatus(HttpStatus.OK)
     public
     @ResponseBody
-    Page<?> unboundedCollectionOfHotels(
+    Page<Hotel> unboundedCollectionOfHotels(
             @RequestParam(value = "page", required = true, defaultValue = DEFAULT_PAGE_NUM) Integer page,
 
             @RequestParam(value = "size", required = true, defaultValue = DEFAULT_PAGE_SIZE) Integer size,
