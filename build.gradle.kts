@@ -28,30 +28,31 @@ java.targetCompatibility = JavaVersion.VERSION_17
 dependencies {
 
     implementation("org.springframework.boot:spring-boot-starter-web")
-    compileOnly("org.springframework.boot:spring-boot-devtools")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-security")
     implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
     implementation("org.thymeleaf.extras:thymeleaf-extras-springsecurity5")
     implementation("org.springframework.boot:spring-boot-actuator")
     implementation("com.h2database:h2")
-    runtimeOnly("org.postgresql:postgresql")
     implementation("io.jsonwebtoken:jjwt-api:0.10.7")
     implementation("org.apache.logging.log4j:log4j-slf4j-impl:2.14.1")
-    // leave for log4shell test never change... meant to be vulnerable
     implementation("org.apache.logging.log4j:log4j-core:2.11.2")
     implementation("org.apache.logging.log4j:log4j-api:2.11.2")
-
     implementation("org.springdoc:springdoc-openapi-ui:1.8.0")
-
-    testCompileOnly("junit:junit")
-
     implementation("io.jsonwebtoken:jjwt-impl:0.10.7")
     implementation("io.jsonwebtoken:jjwt-jackson:0.10.7")
     implementation("io.resurface:resurfaceio-logger:2.2.0")
     implementation("org.apache.commons:commons-compress:1.27.1")
 
+    // leave for log4shell test never change... meant to be vulnerable
+
+    testCompileOnly("junit:junit")
+
+    runtimeOnly("org.postgresql:postgresql")
+
+    compileOnly("org.springframework.boot:spring-boot-devtools")
     compileOnly("org.projectlombok:lombok:1.18.10")
+
     annotationProcessor("org.projectlombok:lombok:1.18.22")
 }
 
