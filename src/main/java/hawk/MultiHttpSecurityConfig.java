@@ -29,7 +29,7 @@ public class MultiHttpSecurityConfig {
 
     @Configuration
     @Order(1)
-    public static class JwtWebSecurityConfigurationAdapter extends WebSecurityConfigurerAdapter {
+    public static class JwtWebSecurityConfigurationAdapter {
         private final JwtTokenProvider jwtTokenProvider;
 
         @Autowired
@@ -61,7 +61,7 @@ public class MultiHttpSecurityConfig {
 
     @Configuration
     @Order(2)
-    public static class TokenWebSecurityConfigurationAdapter extends WebSecurityConfigurerAdapter {
+    public static class TokenWebSecurityConfigurationAdapter {
 
         @Value("${token.http.auth.name:SH_AUTH_TOKEN}")
         private String authHeaderName;
@@ -106,7 +106,7 @@ public class MultiHttpSecurityConfig {
 
     @Configuration
     @Order(3)
-    public static class BasicAuthWebSecurityConfigurerAdapter extends WebSecurityConfigurerAdapter {
+    public static class BasicAuthWebSecurityConfigurerAdapter {
         @Override
         protected void configure(HttpSecurity http) throws Exception {
             http
@@ -122,7 +122,7 @@ public class MultiHttpSecurityConfig {
 
     @Configuration
     @Order(5)
-    public static class FormLoginWebSecurityConfigurerAdapter extends WebSecurityConfigurerAdapter {
+    public static class FormLoginWebSecurityConfigurerAdapter {
         @Override
         protected void configure(HttpSecurity http) throws Exception {
             http
@@ -177,7 +177,7 @@ public class MultiHttpSecurityConfig {
 
     @Configuration
     @Order(4)
-    public static class OktaWebSecurityConfigurerAdapter extends WebSecurityConfigurerAdapter {
+    public static class OktaWebSecurityConfigurerAdapter {
         @Override
         protected void configure(HttpSecurity http) throws Exception {
             http.antMatcher("/api/okta/**")
@@ -188,7 +188,6 @@ public class MultiHttpSecurityConfig {
                     .authorizeRequests()
                     .antMatchers("/api/okta/**")
                     .permitAll();
-            ;
         }
     }
 }

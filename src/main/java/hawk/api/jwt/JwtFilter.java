@@ -1,6 +1,5 @@
 package hawk.api.jwt;
 
-import hawk.api.jwt.JwtTokenProvider;
 import hawk.context.TenantContext;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;

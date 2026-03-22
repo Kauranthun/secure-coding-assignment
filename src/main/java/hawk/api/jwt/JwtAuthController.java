@@ -8,7 +8,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -50,7 +49,7 @@ public class JwtAuthController {
 
             String tenantId = this.userRepo.findByName(username).getTenantId();
             String token = jwtTokenProvider.createToken(username,
-                    userDetails.getAuthorities().stream().map(auth -> ((GrantedAuthority) auth).toString()).toList(),
+                    userDetails.getAuthorities().stream().map(Object::toString).toList(),
                     tenantId);
             Map<Object, Object> model = new HashMap<>();
             model.put("username", username);
