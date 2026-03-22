@@ -34,8 +34,7 @@ public class HotelController extends AbstractRestHandler {
         this.hotelService=hotelService;
     }
 
-    @RequestMapping(value = "",
-            method = RequestMethod.POST,
+    @PostMapping(value = "",
             consumes = {"application/json", "application/xml"},
             produces = {"application/json", "application/xml"})
     @ResponseStatus(HttpStatus.CREATED)
@@ -52,8 +51,7 @@ public class HotelController extends AbstractRestHandler {
         response.setHeader("Location", request.getRequestURL().append("/").append(createdHotel.getId()).toString());
     }
 
-    @RequestMapping(value = "",
-            method = RequestMethod.GET,
+    @GetMapping(value = "",
             produces = {"application/json", "application/xml"})
     @ResponseStatus(HttpStatus.OK)
     public
@@ -64,8 +62,7 @@ public class HotelController extends AbstractRestHandler {
         return this.hotelService.getAllHotels(page, size);
     }
 
-    @RequestMapping(value = "/upper-bounded-list",
-            method = RequestMethod.GET,
+    @GetMapping(value = "/upper-bounded-list",
             produces = {"application/json", "application/xml"})
     @ResponseStatus(HttpStatus.OK)
     public
@@ -77,8 +74,7 @@ public class HotelController extends AbstractRestHandler {
         return this.hotelService.getAllHotels(page, size);
     }
 
-    @RequestMapping(value = "/lower-bounded-list",
-            method = RequestMethod.GET,
+    @GetMapping(value = "/lower-bounded-list",
             produces = {"application/json", "application/xml"})
     @ResponseStatus(HttpStatus.OK)
     public
@@ -91,8 +87,7 @@ public class HotelController extends AbstractRestHandler {
         return this.hotelService.getAllHotels(page, size);
     }
 
-    @RequestMapping(value = "/unbounded-list",
-            method = RequestMethod.GET,
+    @GetMapping(value = "/unbounded-list",
             produces = {"application/json", "application/xml"})
     @ResponseStatus(HttpStatus.OK)
     public
@@ -105,8 +100,7 @@ public class HotelController extends AbstractRestHandler {
         return this.hotelService.getAllHotels(page, size);
     }
 
-    @RequestMapping(value = "/random",
-            method = RequestMethod.GET,
+    @GetMapping(value = "/random",
             produces = {"application/json", "application/xml"})
     @ResponseStatus(HttpStatus.OK)
     public  ResponseEntity<Hotel> getRandomHotel(
@@ -117,16 +111,14 @@ public class HotelController extends AbstractRestHandler {
         return ResponseEntity.ok(this.hotelService.randomHotel());
     }
 
-    @RequestMapping(value = "/locations",
-            method = RequestMethod.GET,
+    @GetMapping(value = "/locations",
             produces = {"application/json", "application/xml"})
     @ResponseStatus(HttpStatus.OK)
     public  Map<Continent, List<Hotel>> getHotelsByLocation(HttpServletRequest request, HttpServletResponse response) {
         return this.hotelService.hotelsByLocation();
     }
 
-    @RequestMapping(value = "/{id}",
-            method = RequestMethod.GET,
+    @GetMapping(value = "/{id}",
             produces = {"application/json", "application/xml"})
     @ResponseStatus(HttpStatus.OK)
     public
@@ -139,8 +131,7 @@ public class HotelController extends AbstractRestHandler {
         return hotel;
     }
 
-    @RequestMapping(value = "/{id}",
-            method = RequestMethod.PUT,
+    @PutMapping(value = "/{id}",
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     @ResponseStatus(HttpStatus.NO_CONTENT)
@@ -159,8 +150,7 @@ public class HotelController extends AbstractRestHandler {
         if (id != hotel.getId()) throw new DataFormatException("ID doesn't match!");
         this.hotelService.updateHotel(hotel);
     }
-    @RequestMapping(value = "/{id}",
-            method = RequestMethod.DELETE,
+    @DeleteMapping(value = "/{id}",
             produces = {"application/json", "application/xml"})
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteHotel(
