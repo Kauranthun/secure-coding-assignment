@@ -53,7 +53,7 @@ public class HotelController extends AbstractRestHandler {
             produces = {"application/json", "application/xml"})
     @ResponseStatus(HttpStatus.OK)
     public
-    @ResponseBody
+
     Page<Hotel> getAllHotel(@RequestParam(value = "page", required = true, defaultValue = DEFAULT_PAGE_NUM) Integer page,
                             @RequestParam(value = "size", required = true, defaultValue = DEFAULT_PAGE_SIZE) Integer size,
                             HttpServletRequest request, HttpServletResponse response) {
@@ -65,7 +65,7 @@ public class HotelController extends AbstractRestHandler {
             produces = {"application/json", "application/xml"})
     @ResponseStatus(HttpStatus.OK)
     public
-    @ResponseBody
+
     Page<Hotel> upperBoundedCollectionOfHotels(
             @RequestParam(value = "page", required = true, defaultValue = DEFAULT_PAGE_NUM) Integer page,
             @RequestParam(value = "size", required = true, defaultValue = DEFAULT_PAGE_SIZE) Integer size,
@@ -78,7 +78,7 @@ public class HotelController extends AbstractRestHandler {
             produces = {"application/json", "application/xml"})
     @ResponseStatus(HttpStatus.OK)
     public
-    @ResponseBody
+
     Page<Hotel> lowerBoundedCollectionOfHotels(
             @RequestParam(value = "page", required = true, defaultValue = DEFAULT_PAGE_NUM) Integer page,
 
@@ -92,7 +92,7 @@ public class HotelController extends AbstractRestHandler {
             produces = {"application/json", "application/xml"})
     @ResponseStatus(HttpStatus.OK)
     public
-    @ResponseBody
+
     Page<Hotel> unboundedCollectionOfHotels(
             @RequestParam(value = "page", required = true, defaultValue = DEFAULT_PAGE_NUM) Integer page,
 
@@ -105,7 +105,7 @@ public class HotelController extends AbstractRestHandler {
             method = RequestMethod.GET,
             produces = {"application/json", "application/xml"})
     @ResponseStatus(HttpStatus.OK)
-    public @ResponseBody ResponseEntity<Hotel> getRandomHotel(
+    public  ResponseEntity<Hotel> getRandomHotel(
             @RequestParam(required = false, defaultValue = "null") Continent continent,
             HttpServletRequest request, HttpServletResponse response
     ) {
@@ -117,7 +117,7 @@ public class HotelController extends AbstractRestHandler {
             method = RequestMethod.GET,
             produces = {"application/json", "application/xml"})
     @ResponseStatus(HttpStatus.OK)
-    public @ResponseBody Map<Continent, List<Hotel>> getHotelsByLocation(HttpServletRequest request, HttpServletResponse response) {
+    public  Map<Continent, List<Hotel>> getHotelsByLocation(HttpServletRequest request, HttpServletResponse response) {
         return this.hotelService.hotelsByLocation();
     }
 
@@ -126,7 +126,7 @@ public class HotelController extends AbstractRestHandler {
             produces = {"application/json", "application/xml"})
     @ResponseStatus(HttpStatus.OK)
     public
-    @ResponseBody
+
     Hotel getHotel(
             @PathVariable("id") Long id,
             HttpServletRequest request, HttpServletResponse response) throws Exception {
