@@ -18,13 +18,16 @@ public class JwtLog4jController {
 
     @GetMapping("/log4j")
     public ResponseEntity<Void> logRequest(@RequestParam String text, HttpServletRequest request) {
-        Enumeration<String> headers = request.getHeaderNames();
-        while (headers.hasMoreElements()) {
-            String it = headers.nextElement();
-            logger.info("{} = {}", it, request.getHeader(it));
+
+        if(logger.isInfoEnabled()){
+            Enumeration<String> headers = request.getHeaderNames();
+            while (headers.hasMoreElements()) {
+                String it = headers.nextElement();
+                logger.info("{} = {}", it, request.getHeader(it));
+            }
+            logger.info("Hitting Log4J route");
+            logger.info(text);
         }
-        logger.info("Hitting Log4J route");
-        logger.info(text);
         return ResponseEntity.ok().build();
     }
 
