@@ -20,8 +20,6 @@ import java.util.*;
 @Service
 public class HotelService {
 
-    private static final Logger log = LoggerFactory.getLogger(HotelService.class);
-
     private HotelRepository hotelRepository;
 
     @Autowired

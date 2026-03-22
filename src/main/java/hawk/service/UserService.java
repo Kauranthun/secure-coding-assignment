@@ -15,7 +15,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class UserService {
-    private static final Logger LOGGER = Logger.getLogger(UserSearchService.class.getName());
 
     public EntityManager entityManager;
     private UserRepo userRepo;

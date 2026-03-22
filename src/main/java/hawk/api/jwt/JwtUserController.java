@@ -29,7 +29,6 @@ public class JwtUserController {
 
     @GetMapping("/search/")
     public ResponseEntity<List<User>> searchAll() {
-        Search search = new Search("");
         return ResponseEntity.ok(this.userService.findUsersByName(""));
     }
 

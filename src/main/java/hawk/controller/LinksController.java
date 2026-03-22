@@ -17,7 +17,6 @@ public class LinksController {
     public String getPayload(Model model, HttpServletRequest request) {
 
         String fullPath = (String) request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
-        String subPath = StringUtils.removeStart(fullPath, "/links");
 
         List<String> links = new ArrayList<>();
         links.add("blah");
