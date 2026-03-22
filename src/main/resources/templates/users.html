@@ -21,7 +21,7 @@
 </head>
 
 <body>
-<div class="container">
+<dialog class="container">
     <div th:insert="general.html :: header" class="header"></div>
     <div class="container">
         <div class="card mt-3">
@@ -48,7 +48,8 @@
     <!-- Modal -->
     <dialog class="modal fade" id="basicExampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
          aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <html class="modal-dialog" lang="en">
+            <head><title>modal-dialog</title></head>
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Log into JWT Rest API</h5>
@@ -84,8 +85,8 @@
                     <button type="button" id="login" class="btn btn-primary">Log In</button>
                 </div>
             </div>
-        </div>
-    </div>
+        </html>
+    </dialog>
 
     <th:block th:replace="general.html :: scripts"/>
     <script lang="en">
