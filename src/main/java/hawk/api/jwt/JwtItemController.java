@@ -19,14 +19,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/jwt/items")
 public class JwtItemController {
 
-    @Autowired
+
     ItemsRepo repo;
 
     private final SearchService searchService;
 
     @Autowired
-    public JwtItemController(SearchService searchService) {
+    public JwtItemController(SearchService searchService, ItemsRepo repo) {
+
         this.searchService = searchService;
+        this.repo=repo;
     }
 
     @GetMapping("/search/")

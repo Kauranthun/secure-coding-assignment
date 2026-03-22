@@ -16,8 +16,14 @@ import java.util.List;
 public class AdminController {
 
     private static final String TITLE = "title";
+
+
+    private final UserSearchService userSearchService;
+
     @Autowired
-    UserSearchService userSearchService;
+    public AdminController(UserSearchService userSearchService){
+        this.userSearchService=userSearchService;
+    }
 
     @GetMapping("/admin")
     public String index(Model model) {

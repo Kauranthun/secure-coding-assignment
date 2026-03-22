@@ -27,8 +27,12 @@ import java.util.Map;
 public class HotelController extends AbstractRestHandler {
 
     Logger logger = Logger.getLogger(getClass().getName());
+
+    private final HotelService hotelService;
     @Autowired
-    private HotelService hotelService;
+    public HotelController(HotelService hotelService){
+        this.hotelService=hotelService;
+    }
 
     @RequestMapping(value = "",
             method = RequestMethod.POST,

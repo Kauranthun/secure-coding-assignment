@@ -20,8 +20,12 @@ public class SearchService {
 
     private static final Logger LOGGER = Logger.getLogger(SearchService.class.getName());
 
-    @Autowired
     EntityManager entityManager;
+
+    @Autowired
+    public SearchService(EntityManager entityManager){
+        this.entityManager=entityManager;
+    }
 
     public List<Item> search(Search search) {
         final Session session = (Session) entityManager.unwrap(Session.class);

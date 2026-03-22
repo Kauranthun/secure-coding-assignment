@@ -22,8 +22,12 @@ public class HotelService {
 
     private static final Logger log = LoggerFactory.getLogger(HotelService.class);
 
-    @Autowired
     private HotelRepository hotelRepository;
+
+    @Autowired
+    public HotelService(HotelRepository hotelRepository){
+        this.hotelRepository=hotelRepository;
+    }
 
     public HotelService() { // Default constructor required by Spring for bean instantiation
     }

@@ -19,14 +19,16 @@ public class SearchController {
 
     private static final String SEARCH = "search";
 
-    @Autowired
     ItemsRepo repo;
-
-    @Autowired
     EntityManager entityManager;
+    SearchService searchService;
 
     @Autowired
-    SearchService searchService;
+    public SearchController(ItemsRepo repo, EntityManager entityManager, SearchService searchService){
+        this.repo=repo;
+        this.entityManager=entityManager;
+        this.searchService=searchService;
+    }
 
     @GetMapping("/search")
     public String searchForm(Model model) {
