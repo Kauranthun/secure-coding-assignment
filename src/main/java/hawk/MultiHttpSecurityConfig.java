@@ -43,6 +43,7 @@ public class MultiHttpSecurityConfig {
             return super.authenticationManagerBean();
         }
 
+        @Override
         protected void configure(HttpSecurity http) throws Exception {
             http
                     .antMatcher("/api/jwt/**")
@@ -68,6 +69,7 @@ public class MultiHttpSecurityConfig {
         @Value("${token.http.auth.value:ITSASECRET}")
         private String authHeaderValue;
 
+        @Override
         protected void configure(HttpSecurity http) throws Exception {
 
             TokenFilter filter = new TokenFilter(authHeaderName);
