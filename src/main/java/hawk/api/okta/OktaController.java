@@ -5,9 +5,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Enumeration;
+
 
 @RestController
 @RequestMapping("/api/okta")
@@ -21,7 +24,9 @@ public class OktaController {
         while (headerNames.hasMoreElements()) {
             String name = headerNames.nextElement();
             String value = request.getHeader(name);
-            logger.info("{}: {}", name, value);
+            if (logger.isLoggable(Level.INFO)) {
+                logger.info(String.format("%s: %s", name, value));
+            }
         }
         String authToken = request.getHeader("Authorization");
         if (authToken == null || !authToken.startsWith("Bearer ")) {

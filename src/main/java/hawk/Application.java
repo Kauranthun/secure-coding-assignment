@@ -69,7 +69,7 @@ public class Application {
                 TenantContext.setCurrentTenant(NUMBER_SUITE);
                 Stream.of(1, 2, 3).forEach(i -> {
                     logger.info(String.format("Adding user%d", i));
-                    userRepo.save(new User(String.format("user%d", i), String.format("we have the best users, users%d", i), NUMBER_suite));
+                    userRepo.save(new User(String.format("user%d", i), String.format("we have the best users, users%d", i), NUMBER_SUITE));
                 });
 
                 // This should be removed once we confirm that all instances of "user" have been removed

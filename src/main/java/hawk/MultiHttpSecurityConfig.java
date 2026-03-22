@@ -12,7 +12,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -27,12 +26,14 @@ import org.springframework.security.web.authentication.Http403ForbiddenEntryPoin
 
 @EnableWebSecurity
 public class MultiHttpSecurityConfig {
-    private final JwtTokenProvider jwtTokenProvider;
+
+    public static final JwtTokenProvider jwtTokenProvider = null;
 
     @Configuration
     @Order(1)
     public static class JwtWebSecurityConfigurationAdapter implements hawk.JwtWebSecurityConfigurationAdapter {
 
+        private final JwtTokenProvider jwtTokenProvider;
 
         @Autowired
         public JwtWebSecurityConfigurationAdapter(JwtTokenProvider jwtTokenProvider) {
@@ -40,12 +41,11 @@ public class MultiHttpSecurityConfig {
         }
 
         @Bean
-        @Override
         public AuthenticationManager authenticationManagerBean() throws Exception {
-            return super.authenticationManagerBean();
+            return authenticationManagerBean();
         }
 
-        @Override
+
         protected void configure(HttpSecurity http) throws Exception {
             http
                     .antMatcher("/api/jwt/**")
@@ -70,8 +70,6 @@ public class MultiHttpSecurityConfig {
 
         @Value("${token.http.auth.value:ITSASECRET}")
         private String authHeaderValue;
-
-        @Override
         protected void configure(HttpSecurity http) throws Exception {
 
             TokenFilter filter = new TokenFilter(authHeaderName);
@@ -109,7 +107,7 @@ public class MultiHttpSecurityConfig {
     @Configuration
     @Order(3)
     public static class BasicAuthWebSecurityConfigurerAdapter {
-        @Override
+
         protected void configure(HttpSecurity http) throws Exception {
             http
                     .antMatcher("/api/basic/**")
@@ -125,7 +123,7 @@ public class MultiHttpSecurityConfig {
     @Configuration
     @Order(5)
     public static class FormLoginWebSecurityConfigurerAdapter {
-        @Override
+
         protected void configure(HttpSecurity http) throws Exception {
             http
                     .authorizeRequests()
@@ -189,7 +187,7 @@ public class MultiHttpSecurityConfig {
     @Configuration
     @Order(4)
     public static class OktaWebSecurityConfigurerAdapter {
-        @Override
+
         protected void configure(HttpSecurity http) throws Exception {
             http.antMatcher("/api/okta/**")
                     .httpBasic().disable()
