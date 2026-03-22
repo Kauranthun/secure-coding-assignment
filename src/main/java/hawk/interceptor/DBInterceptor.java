@@ -19,9 +19,6 @@ import java.util.Map;
 @Configuration
 public class DBInterceptor {
 
-    @Autowired
-    private JpaProperties jpaProperties;
-
     @Bean
     public EmptyInterceptor hibernateInterceptor() {
         return new EmptyInterceptor() {
@@ -53,7 +50,7 @@ public class DBInterceptor {
     }
 
     @Bean
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory(EntityManagerFactoryBuilder factory, DataSource dataSource, JpaProperties properties) {
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory(EntityManagerFactoryBuilder factory, DataSource dataSource, JpaProperties jpaProperties) {
         Map<String, Object> jpaPropertiesMap = new HashMap<>(jpaProperties.getProperties());
         jpaPropertiesMap.put("hibernate.ejb.interceptor", hibernateInterceptor());
         return factory.dataSource(dataSource)
