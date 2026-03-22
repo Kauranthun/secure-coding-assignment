@@ -25,35 +25,41 @@ repositories {
 java.sourceCompatibility = JavaVersion.VERSION_17
 java.targetCompatibility = JavaVersion.VERSION_17
 
-dependencies {
 
+val jjwtVersion = "0.10.7"
+val springdocVersion = "1.8.0"
+val resurfaceVersion = "2.2.0"
+val commonsCompressVersion = "1.27.1"
+
+val vulnerableLog4jSlf4jVersion = "2.14.1"
+val vulnerableLog4jCoreVersion = "2.11.2"
+
+dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-security")
     implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
     implementation("org.thymeleaf.extras:thymeleaf-extras-springsecurity5")
     implementation("org.springframework.boot:spring-boot-actuator")
+    compileOnly("org.springframework.boot:spring-boot-devtools")
+
     implementation("com.h2database:h2")
-    implementation("io.jsonwebtoken:jjwt-api:0.10.7")
-    implementation("org.apache.logging.log4j:log4j-slf4j-impl:2.14.1")
-    implementation("org.apache.logging.log4j:log4j-core:2.11.2")
-    implementation("org.apache.logging.log4j:log4j-api:2.11.2")
-    implementation("org.springdoc:springdoc-openapi-ui:1.8.0")
-    implementation("io.jsonwebtoken:jjwt-impl:0.10.7")
-    implementation("io.jsonwebtoken:jjwt-jackson:0.10.7")
-    implementation("io.resurface:resurfaceio-logger:2.2.0")
-    implementation("org.apache.commons:commons-compress:1.27.1")
+    runtimeOnly("org.postgresql:postgresql")
+    testCompileOnly("junit:junit")
+    compileOnly("org.projectlombok:lombok")
+    annotationProcessor("org.projectlombok:lombok")
+
+    implementation("io.jsonwebtoken:jjwt-api:$jjwtVersion")
+    implementation("io.jsonwebtoken:jjwt-impl:$jjwtVersion")
+    implementation("io.jsonwebtoken:jjwt-jackson:$jjwtVersion")
+    implementation("org.springdoc:springdoc-openapi-ui:$springdocVersion")
+    implementation("io.resurface:resurfaceio-logger:$resurfaceVersion")
+    implementation("org.apache.commons:commons-compress:$commonsCompressVersion")
 
     // leave for log4shell test never change... meant to be vulnerable
-
-    testCompileOnly("junit:junit")
-
-    runtimeOnly("org.postgresql:postgresql")
-
-    compileOnly("org.springframework.boot:spring-boot-devtools")
-    compileOnly("org.projectlombok:lombok:1.18.10")
-
-    annotationProcessor("org.projectlombok:lombok:1.18.22")
+    implementation("org.apache.logging.log4j:log4j-slf4j-impl:$vulnerableLog4jSlf4jVersion")
+    implementation("org.apache.logging.log4j:log4j-core:$vulnerableLog4jCoreVersion")
+    implementation("org.apache.logging.log4j:log4j-api:$vulnerableLog4jCoreVersion")
 }
 
 configurations.implementation {
