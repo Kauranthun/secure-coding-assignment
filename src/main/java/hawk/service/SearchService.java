@@ -33,11 +33,6 @@ public class SearchService {
                 String query = "select id, name, description from ITEM where description like '%" +
                         search.getSearchText() + "%'";
 
-                LOGGER.log(Level.INFO, "SQL Query: {0}",  query);;
-                ResultSet rs = connection
-                        .createStatement()
-                        .executeQuery(query);
-
                 /* The righter way, should probably use built in Data Model for this, but this is safe
                 String query = "select id, name, description from ITEM where description like ?";
                 PreparedStatement statement = connection.prepareStatement(query);
@@ -46,10 +41,19 @@ public class SearchService {
                 ResultSet rs = statement.executeQuery();
                 */
 
-                while (rs.next()) {
-                    items.add(new Item(rs.getLong("id"), rs.getString("name"), rs.getString("description")));
+                LOGGER.log(Level.INFO, "SQL Query: {0}",  query);
+                try (java.sql.Statement statement = connection.createStatement();
+                     ResultSet rs = statement.executeQuery(query)) {
+
+                    while (rs.next()) {
+                        items.add(new Item(
+                                rs.getLong("id"),
+                                rs.getString("name"),
+                                rs.getString("description")
+                        ));
+                    }
                 }
-                rs.close();
+
                 return items;
             }
         });
