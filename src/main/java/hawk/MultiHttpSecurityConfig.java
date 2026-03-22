@@ -19,6 +19,8 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.access.ExceptionTranslationFilter;
 import org.springframework.security.web.authentication.Http403ForbiddenEntryPoint;
@@ -156,17 +158,18 @@ public class MultiHttpSecurityConfig {
 
     @Bean
     public UserDetailsService userDetailsService() {
+        PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
         UserDetails user =
-                User.withDefaultPasswordEncoder()
+                User.builder()
                         .username("user")
-                        .password("password")
+                        .password(encoder.encode("password"))
                         .roles("USER")
                         .build();
 
         UserDetails user2 =
-                User.withDefaultPasswordEncoder()
+                User.builder()
                         .username("janesmith")
-                        .password("password")
+                        .password(encoder.encode("password"))
                         .roles("USER")
                         .build();
 

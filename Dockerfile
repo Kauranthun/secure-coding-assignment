@@ -2,9 +2,8 @@ FROM eclipse-temurin:17-jdk-jammy
 
 RUN mkdir /javavulny /app
 COPY . /javavulny/
-RUN sed -i 's/localhost\:5432/db\:5432/' /javavulny/src/main/resources/application.yaml
-
-RUN cd /javavulny \
+RUN sed -i 's/localhost\:5432/db\:5432/' /javavulny/src/main/resources/application.yaml \
+&&cd /javavulny \
 && ./gradlew --no-daemon :build \
 && cp build/libs/java-spring-vuly-0.2.0.jar /app/ \
 && rm -Rf build/ \

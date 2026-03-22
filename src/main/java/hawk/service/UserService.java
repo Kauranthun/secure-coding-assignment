@@ -4,17 +4,14 @@ import hawk.entity.User;
 import hawk.repos.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.persistence.EntityManager;
 import java.util.List;
 
 public class UserService {
 
-    public EntityManager entityManager;
-    private UserRepo userRepo;
+    private final UserRepo userRepo;
 
     @Autowired
-    public UserService(EntityManager entityManager, UserRepo userRepo){
-        this.entityManager=entityManager;
+    public UserService(UserRepo userRepo){
         this.userRepo=userRepo;
     }
 

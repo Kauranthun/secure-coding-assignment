@@ -18,6 +18,6 @@ public class Config implements WebMvcConfigurer {
     @Bean
     public UserSearchService userSearchService(EntityManager entityManager) { return new UserSearchService(entityManager); }
     @Bean
-    public UserService userService(EntityManager entityManager,UserRepo userRepo) { return new UserService(entityManager,userRepo); }
+    public UserService userService(UserRepo userRepo) { return new UserService(userRepo); }
 
 }
