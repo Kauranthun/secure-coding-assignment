@@ -1,7 +1,8 @@
 package hawk.hotel.domain;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
+import hawk.exceptions.JsonConversionException;
 import javax.persistence.*;
 import java.util.List;
 
@@ -47,19 +48,12 @@ public class Building {
         ObjectMapper objectMapper = new ObjectMapper();
         try {
             return objectMapper.readValue(this.blahs, objectMapper.getTypeFactory().constructCollectionType(List.class, Integer.class));
-        } catch (Exception e) {
-            throw new RuntimeException("Error converting JSON to numbers", e);
+        } catch (JsonProcessingException e) {
+            throw new JsonConversionException("Error converting JSON to numbers", e);
         }
     }
 
-    public void setBlahs(List<Integer> blahs) {
-        ObjectMapper objectMapper = new ObjectMapper();
-        try {
-            this.blahs = objectMapper.writeValueAsString(blahs);
-        } catch (Exception e) {
-            throw new RuntimeException("Error converting numbers to JSON", e);
-        }
-    }
+
 
     public String getName() {
         return name;

@@ -133,10 +133,9 @@ public class HotelController extends AbstractRestHandler {
 
     Hotel getHotel(
             @PathVariable("id") Long id,
-            HttpServletRequest request, HttpServletResponse response) throws Exception {
+            HttpServletRequest request, HttpServletResponse response){
         Hotel hotel = this.hotelService.getHotel(id);
         checkResourceFound(hotel);
-        //todo: http://goo.gl/6iNAkz
         return hotel;
     }
 
