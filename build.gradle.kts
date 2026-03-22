@@ -41,25 +41,31 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
     implementation("org.thymeleaf.extras:thymeleaf-extras-springsecurity5")
     implementation("org.springframework.boot:spring-boot-actuator")
-    compileOnly("org.springframework.boot:spring-boot-devtools")
-
-    implementation("com.h2database:h2")
-    runtimeOnly("org.postgresql:postgresql")
-    testCompileOnly("junit:junit")
-    compileOnly("org.projectlombok:lombok")
-    annotationProcessor("org.projectlombok:lombok")
-
-    implementation("io.jsonwebtoken:jjwt-api:$jjwtVersion")
-    implementation("io.jsonwebtoken:jjwt-impl:$jjwtVersion")
-    implementation("io.jsonwebtoken:jjwt-jackson:$jjwtVersion")
-    implementation("org.springdoc:springdoc-openapi-ui:$springdocVersion")
-    implementation("io.resurface:resurfaceio-logger:$resurfaceVersion")
-    implementation("org.apache.commons:commons-compress:$commonsCompressVersion")
+    implementation("io.jsonwebtoken:jjwt-api:${jjwtVersion}")
+    implementation("io.jsonwebtoken:jjwt-impl:${jjwtVersion}")
+    implementation("io.jsonwebtoken:jjwt-jackson:${jjwtVersion}")
+    implementation("org.springdoc:springdoc-openapi-ui:${springdocVersion}")
+    implementation("io.resurface:resurfaceio-logger:${resurfaceVersion}")
+    implementation("org.apache.commons:commons-compress:${commonsCompressVersion}")
+    implementation("org.apache.logging.log4j:log4j-slf4j-impl:${vulnerableLog4jSlf4jVersion}")
+    implementation("org.apache.logging.log4j:log4j-core:${vulnerableLog4jCoreVersion}")
+    implementation("org.apache.logging.log4j:log4j-api:${vulnerableLog4jCoreVersion}")
 
     // leave for log4shell test never change... meant to be vulnerable
-    implementation("org.apache.logging.log4j:log4j-slf4j-impl:$vulnerableLog4jSlf4jVersion")
-    implementation("org.apache.logging.log4j:log4j-core:$vulnerableLog4jCoreVersion")
-    implementation("org.apache.logging.log4j:log4j-api:$vulnerableLog4jCoreVersion")
+
+
+    implementation("com.h2database:h2")
+
+    runtimeOnly("org.postgresql:postgresql")
+
+    testCompileOnly("junit:junit")
+
+    compileOnly("org.springframework.boot:spring-boot-devtools")
+    compileOnly("org.projectlombok:lombok")
+
+    annotationProcessor("org.projectlombok:lombok")
+
+
 }
 
 configurations.implementation {
