@@ -16,7 +16,7 @@ public class LinksController {
     @GetMapping(value = {"/links/**"})
     public String getPayload(Model model, HttpServletRequest request) {
 
-        String fullPath = (String) request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
+
 
         List<String> links = new ArrayList<>();
         links.add("blah");
