@@ -27,12 +27,12 @@ import org.springframework.security.web.authentication.Http403ForbiddenEntryPoin
 
 @EnableWebSecurity
 public class MultiHttpSecurityConfig {
-
+    private final JwtTokenProvider jwtTokenProvider;
 
     @Configuration
     @Order(1)
-    public static class JwtWebSecurityConfigurationAdapter {
-        private final JwtTokenProvider jwtTokenProvider;
+    public static class JwtWebSecurityConfigurationAdapter implements hawk.JwtWebSecurityConfigurationAdapter {
+
 
         @Autowired
         public JwtWebSecurityConfigurationAdapter(JwtTokenProvider jwtTokenProvider) {
@@ -156,20 +156,28 @@ public class MultiHttpSecurityConfig {
         }
     }
 
+
+    @Value("${app.test-user.username}")
+    private String testUsername;
+
+    @Value("${app.test-user.password}")
+    private String testPassword;
+
     @Bean
     public UserDetailsService userDetailsService() {
+
         PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
         UserDetails user =
                 User.builder()
-                        .username("user")
-                        .password(encoder.encode("password"))
+                        .username(testUsername)
+                        .password(encoder.encode(testPassword))
                         .roles("USER")
                         .build();
 
         UserDetails user2 =
                 User.builder()
-                        .username("janesmith")
-                        .password(encoder.encode("password"))
+                        .username(testUsername)
+                        .password(encoder.encode(testPassword))
                         .roles("USER")
                         .build();
 
