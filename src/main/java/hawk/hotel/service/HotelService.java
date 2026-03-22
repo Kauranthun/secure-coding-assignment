@@ -60,7 +60,7 @@ public class HotelService {
         List<Hotel> hotels = new ArrayList<>(hotelRepository.findAll(pageable).getContent());
         Collections.shuffle(hotels);
 
-        Map<Continent, List<Hotel>> hotelsByLocation = new HashMap<>();
+        Map<Continent, List<Hotel>> hotelsByLocation = new EnumMap<>(Continent.class);
 
         for (Hotel hotel : hotels) {
             Continent[] continents = Continent.values();
