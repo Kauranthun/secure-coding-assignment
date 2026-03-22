@@ -17,6 +17,8 @@ import java.util.List;
 @Controller
 public class SearchController {
 
+    private static final String SEARCH = "search";
+
     @Autowired
     ItemsRepo repo;
 
@@ -28,18 +30,18 @@ public class SearchController {
 
     @GetMapping("/search")
     public String searchForm(Model model) {
-        model.addAttribute("search", new Search());
+        model.addAttribute(SEARCH, new Search());
         model.addAttribute("title", "Search");
-        return "search";
+        return SEARCH;
     }
 
     @PostMapping("/search")
     public String searchSubmit(@ModelAttribute Search search, Model model) {
         List<Item> items = searchService.search(search);
         model.addAttribute("items", items);
-        model.addAttribute("search", search);
+        model.addAttribute(SEARCH, search);
         model.addAttribute("title", "Search");
-        return "search";
+        return SEARCH;
     }
 
 }

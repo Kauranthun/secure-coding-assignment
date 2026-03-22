@@ -20,6 +20,9 @@ public class Application {
 
     Logger logger = Logger.getLogger(getClass().getName());
 
+    private static final String ITEM = "item: %s";
+    private static final String NUMBER_suite = "1234567";
+
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
     }
@@ -47,7 +50,7 @@ public class Application {
             logger.info(String.format("Items in DB %d", repo.count()));
 
             if (repo.count() == 0) {
-                repo.findAll().forEach(item -> logger.info(String.format("item: %s", item.getName())));
+                repo.findAll().forEach(item -> logger.info(String.format(ITEM, item.getName())));
 
                 Stream.of(1, 2, 3).forEach(i -> {
                     logger.info(String.format("Adding item%d", i));
@@ -55,24 +58,24 @@ public class Application {
                 });
 
                 logger.info(String.format("Items in DB %d", repo.count()));
-                repo.findAll().forEach(item -> logger.info(String.format("item: %s", item.getName())));
+                repo.findAll().forEach(item -> logger.info(String.format(ITEM, item.getName())));
             }
 
             logger.info(String.format("Users in DB %d", userRepo.count()));
 
             if (userRepo.count() == 0) {
-                userRepo.findAll().forEach(item -> logger.info(String.format("item: %s", item.getName())));
+                userRepo.findAll().forEach(item -> logger.info(String.format(ITEM, item.getName())));
 
-                TenantContext.setCurrentTenant("1234567");
+                TenantContext.setCurrentTenant(NUMBER_suite);
                 Stream.of(1, 2, 3).forEach(i -> {
                     logger.info(String.format("Adding user%d", i));
-                    userRepo.save(new User(String.format("user%d", i), String.format("we have the best users, users%d", i), "1234567"));
+                    userRepo.save(new User(String.format("user%d", i), String.format("we have the best users, users%d", i), NUMBER_suite));
                 });
 
                 // This should be removed once we confirm that all instances of "user" have been removed
-                userRepo.save(new User("user", "The auth user", "1234567"));
+                userRepo.save(new User("user", "The auth user", NUMBER_suite));
 
-                userRepo.save(new User("janesmith", "The auth user", "1234567"));
+                userRepo.save(new User("janesmith", "The auth user", NUMBER_suite));
 
                 TenantContext.setCurrentTenant("12345678");
                 Stream.of(4, 5, 6).forEach(i -> {

@@ -35,6 +35,9 @@ public class LoginController {
     private final AuthenticationManager authenticationManager;
     private final UserDetailsService userDetailsService;
 
+    private static final String COOKIE = "cookie-";
+    private static final String TITLE = "title";
+
     @Autowired
     public LoginController(AuthenticationManager authenticationManager, UserDetailsService userDetailsService) {
         this.authenticationManager = authenticationManager;
@@ -43,7 +46,7 @@ public class LoginController {
 
     @GetMapping("/login")
     public String login(Model model) {
-        model.addAttribute("title", "Login title");
+        model.addAttribute(TITLE, "Login title");
         return "login";
     }
 
@@ -53,7 +56,7 @@ public class LoginController {
     public String loginCode(HttpServletRequest req, HttpServletResponse resp, Model model) {
         String sessId = req.getSession().getId();
         String cookieCode = UUID.randomUUID().toString();
-        loginCodes.put("cookie-" + sessId, cookieCode);
+        loginCodes.put(COOKIE + sessId, cookieCode);
         resp.addCookie(new Cookie("XLOGINID", cookieCode));
         return "redirect:/login-form-multi";
     }
@@ -61,11 +64,11 @@ public class LoginController {
     @GetMapping("/login-form-multi")
     public String loginFormMulti(HttpServletRequest req, Model model) {
         String sessId = req.getSession().getId();
-        String loginCode = loginCodes.get("cookie-" + sessId);
+        String loginCode = loginCodes.get(COOKIE + sessId);
         if (loginCode == null) {
             return "redirect:/login-code";
         }
-        model.addAttribute("title", "Login multi title");
+        model.addAttribute(TITLE, "Login multi title");
         model.addAttribute("loginCode", loginCode);
         return "login-form-multi";
     }
@@ -77,7 +80,7 @@ public class LoginController {
                                  @ModelAttribute ExtraAuthenticationRequest data) {
         try {
             String sessId = req.getSession().getId();
-            String loginCode = loginCodes.get("cookie-" + sessId);
+            String loginCode = loginCodes.get(COOKIE + sessId);
 
             if (data.getLoginCode() == null
                     || data.getRemember() == null
@@ -108,10 +111,10 @@ public class LoginController {
     @GetMapping("/login-multi-check")
     public String loginCheck(HttpServletRequest req, HttpServletResponse resp, Model model, @CookieValue("XLOGINID") String xLoginId) {
         String sessId = req.getSession().getId();
-        String loginCode = loginCodes.get("cookie-" + sessId);
+        String loginCode = loginCodes.get(COOKIE + sessId);
         if (loginCode == null || !loginCode.equals(xLoginId))
             return "redirect:/login-form-multi";
-        model.addAttribute("title", "StackHawk Java Vulny Application");
+        model.addAttribute(TITLE, "StackHawk Java Vulny Application");
         return "index";
     }
 

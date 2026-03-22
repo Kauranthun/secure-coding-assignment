@@ -15,31 +15,32 @@ import java.util.List;
 @Controller
 public class AdminController {
 
+    private static final String TITLE = "title";
     @Autowired
     UserSearchService userSearchService;
 
     @GetMapping("/admin")
     public String index(Model model) {
-        model.addAttribute("title", "Admin");
+        model.addAttribute(TITLE, "Admin");
         return "admin";
     }
 
     @GetMapping("/admin/users")
     public String users(Model model) {
-        model.addAttribute("title", "Users");
+        model.addAttribute(TITLE, "Users");
         return "users";
     }
 
     @GetMapping("/admin/companies")
     public String companies(Model model) {
-        model.addAttribute("title", "Companies");
+        model.addAttribute(TITLE, "Companies");
         return "companies";
     }
 
     @GetMapping( "/admin/search")
     public String searchForm(Model model) {
         model.addAttribute("search", new Search());
-        model.addAttribute("title", "User Search");
+        model.addAttribute(TITLE, "User Search");
         return "user-search";
     }
 
@@ -48,7 +49,7 @@ public class AdminController {
         List<User> users = userSearchService.search(search);
         model.addAttribute("users", users);
         model.addAttribute("search", search);
-        model.addAttribute("title", "User Search");
+        model.addAttribute(TITLE, "User Search");
         return "user-search";
     }
 }
