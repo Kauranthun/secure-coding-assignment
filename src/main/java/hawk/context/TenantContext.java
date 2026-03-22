@@ -1,6 +1,11 @@
 package hawk.context;
 
 public class TenantContext {
+
+    private TenantContext() {
+        /* This utility class should not be instantiated */
+    }
+
     private static ThreadLocal<String> currentTenant = new InheritableThreadLocal<>();
 
     public static String getCurrentTenant() {
