@@ -43,6 +43,7 @@ public class PayloadController {
                 Thread.sleep(sleepFor);
             } catch (InterruptedException e) {
                 e.printStackTrace();
+                Thread.currentThread().interrupt();
             }
         }
     }
