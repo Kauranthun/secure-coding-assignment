@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import hawk.hotel.dto.HotelCreateDTO;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -34,8 +35,15 @@ public class HotelController extends AbstractRestHandler {
             consumes = {"application/json", "application/xml"},
             produces = {"application/json", "application/xml"})
     @ResponseStatus(HttpStatus.CREATED)
-    public void createHotel(@RequestBody Hotel hotel,
+    public void createHotel(@RequestBody HotelCreateDTO hotelDto,
                             HttpServletRequest request, HttpServletResponse response) {
+        Hotel hotel = new Hotel();
+        hotel.setName(hotelDto.getName());
+        hotel.setDescription(hotelDto.getDescription());
+        hotel.setRating(hotelDto.getRating());
+        hotel.setCity(hotelDto.getCity());
+        hotel.setContinent(hotelDto.getContinent());
+
         Hotel createdHotel = this.hotelService.createHotel(hotel);
         response.setHeader("Location", request.getRequestURL().append("/").append(createdHotel.getId()).toString());
     }
@@ -134,8 +142,16 @@ public class HotelController extends AbstractRestHandler {
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void updateHotel(
-            @PathVariable("id") Long id, @RequestBody Hotel hotel,
+            @PathVariable("id") Long id, @RequestBody HotelCreateDTO hotelDto,
             HttpServletRequest request, HttpServletResponse response) {
+
+        Hotel hotel = new Hotel();
+        hotel.setName(hotelDto.getName());
+        hotel.setDescription(hotelDto.getDescription());
+        hotel.setRating(hotelDto.getRating());
+        hotel.setCity(hotelDto.getCity());
+        hotel.setContinent(hotelDto.getContinent());
+
         checkResourceFound(this.hotelService.getHotel(id));
         if (id != hotel.getId()) throw new DataFormatException("ID doesn't match!");
         this.hotelService.updateHotel(hotel);
